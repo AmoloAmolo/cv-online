@@ -1,0 +1,838 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>John Amolo | AI Operations & Sales Development Specialist</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ========== RESET & GLOBAL ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Space Grotesk', sans-serif;
+            background: #05010f;
+            color: #eaeefb;
+            line-height: 1.5;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* animated gradient orb background */
+        .orb-bg {
+            position: fixed;
+            top: -30%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 30% 40%, rgba(106, 13, 173, 0.4), rgba(0, 0, 0, 0.85), rgba(30, 0, 60, 0.6));
+            filter: blur(120px);
+            z-index: -2;
+            animation: subtleDrift 25s infinite alternate ease-in-out;
+        }
+
+        .orb-bg-secondary {
+            position: fixed;
+            bottom: -20%;
+            right: -10%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 80%, rgba(139, 0, 255, 0.25), transparent 70%);
+            filter: blur(100px);
+            z-index: -2;
+            animation: driftReverse 18s infinite alternate;
+        }
+
+        @keyframes subtleDrift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(4%, 2%) scale(1.03); }
+        }
+
+        @keyframes driftReverse {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-3%, -2%) scale(1.02); }
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* glass morph header */
+        .glass-header {
+            background: rgba(15, 5, 35, 0.5);
+            backdrop-filter: blur(14px);
+            border-radius: 2rem;
+            border: 1px solid rgba(156, 70, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 1.7rem;
+            background: linear-gradient(135deg, #e2c9ff, #b87cff, #9b4dff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+        .logo-accent {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #c084fc;
+            margin-left: 6px;
+        }
+        .header-tag i {
+            margin-right: 8px;
+            color: #b77cff;
+        }
+        .header-tag {
+            font-size: 0.85rem;
+            background: rgba(98, 0, 234, 0.35);
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            border-left: 2px solid #a855f7;
+        }
+
+        /* hero */
+        .hero {
+            margin: 2rem 0 3rem;
+        }
+        .hero-badge {
+            margin-bottom: 1rem;
+        }
+        .badge-glow {
+            background: rgba(128, 0, 255, 0.2);
+            padding: 0.35rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            border: 1px solid #b77cff60;
+            backdrop-filter: blur(4px);
+            display: inline-block;
+        }
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 1rem 0 1rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .glitch-text {
+            position: relative;
+            animation: glitch 4s infinite;
+        }
+        @keyframes glitch {
+            0%, 100% { text-shadow: -2px 0 #a855f7, 2px 0 #00ffff; }
+            33% { text-shadow: 2px 0 #a855f7, -2px 0 #00ffff; }
+            66% { text-shadow: -1px 0 #ff00c6, 1px 0 #a855f7; }
+        }
+        .hero-stats {
+            display: flex;
+            gap: 1.8rem;
+            flex-wrap: wrap;
+            margin: 1.8rem 0;
+        }
+        .stat-item {
+            background: rgba(60, 0, 120, 0.45);
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            border: 1px solid #7c3aed40;
+        }
+        .stat-item i {
+            margin-right: 8px;
+            color: #c084fc;
+        }
+        .summary-card {
+            background: rgba(25, 5, 50, 0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 1.8rem;
+            border: 1px solid rgba(160, 120, 255, 0.35);
+            box-shadow: 0 20px 35px -15px rgba(0,0,0,0.5);
+        }
+        .summary-card p {
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 1.2rem;
+            color: #e2dcff;
+        }
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+        }
+        .contact-row a {
+            color: #cfb3ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .contact-row a i {
+            margin-right: 0.5rem;
+        }
+        .contact-row a:hover {
+            color: white;
+            text-shadow: 0 0 5px #a855f7;
+        }
+
+        /* section titles */
+        .section-title {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin: 2.5rem 0 1.8rem;
+        }
+        .title-number {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #a855f7;
+            background: rgba(128,0,255,0.2);
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+        }
+        .section-title h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            text-transform: uppercase;
+        }
+        .title-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, #a855f7, transparent);
+        }
+
+        /* skills grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+        .skill-category {
+            background: rgba(8, 2, 20, 0.65);
+            backdrop-filter: blur(8px);
+            border-radius: 1.8rem;
+            padding: 1.5rem;
+            border: 1px solid #7c3aed30;
+            transition: all 0.25s ease;
+        }
+        .skill-category:hover {
+            border-color: #b87cff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -8px rgba(168, 85, 247, 0.3);
+        }
+        .cat-header {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: #cfa5ff;
+        }
+        .cat-header i {
+            margin-right: 10px;
+        }
+        .skill-category ul {
+            list-style: none;
+        }
+        .skill-category li {
+            margin-bottom: 0.7rem;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.92rem;
+        }
+        .skill-category li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #b77cff;
+        }
+
+        /* timeline experience */
+        .timeline {
+            position: relative;
+            padding-left: 1rem;
+        }
+        .timeline-item {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .timeline-dot {
+            width: 14px;
+            height: 14px;
+            background: #a855f7;
+            border-radius: 50%;
+            position: absolute;
+            left: -0.9rem;
+            top: 0.6rem;
+            box-shadow: 0 0 0 3px #4a0e6e;
+            transition: all 0.2s;
+        }
+        .timeline-date {
+            width: 115px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #bc96f0;
+            padding-top: 0.2rem;
+        }
+        .timeline-content {
+            flex: 1;
+            background: rgba(18, 6, 38, 0.55);
+            backdrop-filter: blur(6px);
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.6rem;
+            margin-left: 1rem;
+            border-left: 3px solid #a855f7;
+            transition: all 0.2s;
+        }
+        .timeline-content:hover {
+            background: rgba(30, 12, 55, 0.7);
+            transform: translateX(5px);
+        }
+        .timeline-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .timeline-content h3 span {
+            color: #bb99ff;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        .timeline-content p {
+            margin: 0.5rem 0 0.7rem;
+            font-size: 0.9rem;
+            color: #dbd0ff;
+        }
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .tech-tags span {
+            background: #351c5e;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        /* education & cert dual */
+        .dual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .info-card {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            border-radius: 1.5rem;
+            padding: 1.4rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #61439b;
+            transition: 0.2s;
+        }
+        .info-card:hover {
+            border-color: #a855f7;
+            transform: translateY(-3px);
+        }
+        .info-card i {
+            font-size: 1.7rem;
+            color: #a855f7;
+            margin-bottom: 0.5rem;
+        }
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+        .date-badge {
+            display: inline-block;
+            margin-top: 0.6rem;
+            font-size: 0.7rem;
+            background: #2a1b44;
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
+        }
+        .cert-badge-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .cert-item {
+            background: rgba(70, 20, 120, 0.45);
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-left: 3px solid #a855f7;
+            transition: 0.2s;
+        }
+        .cert-item:hover {
+            background: rgba(100, 40, 160, 0.6);
+            transform: translateX(4px);
+        }
+        .cert-item i {
+            width: 28px;
+            color: #ca9eff;
+        }
+        .lang-box {
+            background: rgba(0,0,0,0.4);
+            border-radius: 1.5rem;
+            margin-top: 1.8rem;
+            padding: 1.2rem;
+        }
+        .lang-box h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        .lang-items {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .lang-items span {
+            background: #341e57;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+        }
+
+        /* highlight section (AI projects / achievements) */
+        .achievements {
+            margin: 2.5rem 0;
+        }
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .achieve-card {
+            background: linear-gradient(145deg, rgba(60, 20, 100, 0.4), rgba(20, 5, 45, 0.6));
+            backdrop-filter: blur(8px);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #9b4dff40;
+            transition: all 0.2s;
+        }
+        .achieve-card i {
+            font-size: 2.2rem;
+            color: #c084fc;
+            margin-bottom: 0.8rem;
+        }
+        .achieve-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        .achieve-card p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        .achieve-card:hover {
+            transform: scale(1.02);
+            border-color: #c084fc;
+            box-shadow: 0 0 18px rgba(168,85,247,0.3);
+        }
+
+        .glow-bar {
+            margin: 3rem 0 2rem;
+            border-top: 1px solid #9b4dff40;
+            border-bottom: 1px solid #9b4dff40;
+            padding: 0.7rem 0;
+            overflow: hidden;
+        }
+        .marquee-text {
+            white-space: nowrap;
+            animation: scrollText 24s linear infinite;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+        @keyframes scrollText {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        footer {
+            margin-top: 3rem;
+            padding: 1.2rem 0;
+            border-top: 1px solid #3c2a5e;
+        }
+        .footer-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .footer-copy {
+            font-size: 0.8rem;
+            color: #aa99dd;
+        }
+        .footer-icons i {
+            margin-left: 1.2rem;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .footer-icons i:hover {
+            opacity: 1;
+            color: #b77cff;
+        }
+
+        /* responsive */
+        @media (max-width: 850px) {
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2.3rem;
+            }
+            .dual-grid {
+                grid-template-columns: 1fr;
+            }
+            .timeline-date {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+            .timeline-item {
+                flex-direction: column;
+            }
+            .timeline-dot {
+                left: 0.3rem;
+                top: 1.3rem;
+            }
+            .timeline-content {
+                margin-left: 1.8rem;
+            }
+            .glass-header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+            .contact-row {
+                flex-direction: column;
+                gap: 0.7rem;
+            }
+        }
+        @media (max-width: 550px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-stats {
+                justify-content: space-between;
+            }
+            .achievement-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb-bg"></div>
+    <div class="orb-bg-secondary"></div>
+    <div class="noise-overlay"></div>
+
+    <div class="container">
+        <header class="glass-header">
+            <div class="logo">
+                <span class="logo-text">JOHN AMOLO</span>
+                <span class="logo-accent">// AI OPS & SALES</span>
+            </div>
+            <div class="header-tag">
+                <i class="fas fa-microchip"></i> sales, dev & AI operations · remote-first
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="hero-badge">
+                <span class="badge-glow"><i class="fas fa-map-marker-alt"></i> nairobi, kenya · global remote</span>
+            </div>
+            <h1 class="glitch-text" data-text="SALES, DEVELOPMENT & AI OPERATIONS">SALES, DEVELOPMENT <br> & AI OPERATIONS SPECIALIST</h1>
+            <div class="hero-stats">
+                <div class="stat-item"><i class="fas fa-database"></i> 7+ years data & AI</div>
+                <div class="stat-item"><i class="fas fa-globe"></i> 12+ remote projects</div>
+                <div class="stat-item"><i class="fas fa-robot"></i> 10+ AI models trained</div>
+                <div class="stat-item"><i class="fas fa-chart-line"></i> sales dev certified</div>
+            </div>
+            <div class="summary-card">
+                <p>Detail-oriented professional with expertise in remote collaboration, client-focused communication, and high-performance digital operations. Strong technical background in AI data lifecycle, Python, SQL, and model evaluation — combined with sales development mindset and customer engagement strategies.</p>
+                <div class="contact-row">
+                    <a href="mailto:johnouammolo@gmail.com"><i class="fas fa-envelope"></i> johnouammolo@gmail.com</a>
+                    <a href="tel:+254720937259"><i class="fas fa-phone-alt"></i> +254 720 937259</a>
+                    <a href="#"><i class="fab fa-linkedin"></i> linkedin.com/in/john-amolo</a>
+                    <a href="#"><i class="fab fa-github"></i> github.com/johnamolo</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills">
+            <div class="section-title">
+                <span class="title-number">01</span>
+                <h2>core competencies</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="cat-header"><i class="fas fa-brain"></i> AI & Data Engineering</div>
+                    <ul>
+                        <li>Python (Pandas, NumPy, Scikit-learn)</li>
+                        <li>SQL · Data Validation & ETL</li>
+                        <li>Model Training & QA pipelines</li>
+                        <li>Bias Mitigation / Data Lifecycle</li>
+                        <li>Prompt Engineering & LLM eval</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <div class="cat-header"><i class="fas fa-users"></i> Sales & Leadership</div>
+                    <ul>
+                        <li>Critical Thinking & Problem-Solving</li>
+                        <li>Remote Collaboration & Team Mgt</li>
+                        <li>Client Engagement & CRM tools</li>
+                        <li>Ethical AI Awareness</li>
+                        <li>Agile & Project Coordination</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <div class="cat-header"><i class="fas fa-tools"></i> Platforms & Automation</div>
+                    <ul>
+                        <li>Annotation Tools (CVAT, Labelbox, Supervisely)</li>
+                        <li>3D LiDAR / Segmentation / Object Tracking</li>
+                        <li>Jupyter · VS Code · Git · Docker</li>
+                        <li>Google Suite / MS Office / Notion</li>
+                        <li>Automation · Content Creation · Zapier</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="experience">
+            <div class="section-title">
+                <span class="title-number">02</span>
+                <h2>professional journey</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2025 – present</div>
+                    <div class="timeline-content glass-card">
+                        <h3>Robotics Data Annotation & Review Specialist <span>@ Atlas Capture</span></h3>
+                        <p>Reviewed operational workflows & performance data, improved efficiency & QA standards. Collaborated with remote teams on high-priority projects, analyzed complex visual/text-based datasets, identified anomalies, and escalated critical issues for workflow reliability.</p>
+                        <div class="tech-tags"><span>computer vision</span><span>LiDAR QA</span><span>root cause analysis</span><span>Python scripts</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2025 (3 mo)</div>
+                    <div class="timeline-content glass-card">
+                        <h3>AI Data Annotator & Evaluator <span>@ Micro1 Inc.</span></h3>
+                        <p>Evaluated complex outputs, performed QA checks & compliance reviews. Compared multiple solutions to identify the most accurate, consistent results. Contributed to continuous workflow improvement, supported distributed teams for high-quality deliverables.</p>
+                        <div class="tech-tags"><span>model evaluation</span><span>accuracy metrics</span><span>performance gaps</span><span>LLM feedback</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2020 – 2025</div>
+                    <div class="timeline-content glass-card">
+                        <h3>Delivery Associate <span>@ Sama Kenya Ltd.</span></h3>
+                        <p>Annotated video & image datasets using bounding boxes, segmentation, object tracking. Performed quality checks & flagged model errors to enhance detection performance. Maintained strict data governance & confidentiality while improving dataset completeness.</p>
+                        <div class="tech-tags"><span>bounding boxes</span><span>segmentation</span><span>data privacy</span><span>object tracking</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2019 – 2025</div>
+                    <div class="timeline-content glass-card">
+                        <h3>Data Specialist <span>@ Cloudfactory Kenya Ltd</span></h3>
+                        <p>Managed high-volume data projects with strong accuracy & deadline delivery. Improved remote workflow efficiency, processed complex multi-source information, collaborated cross-functionally to meet quality expectations and productivity targets.</p>
+                        <div class="tech-tags"><span>data ops</span><span>team sync</span><span>QA cycles</span><span>process automation</span></div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2018 – 2020</div>
+                    <div class="timeline-content glass-card">
+                        <h3>3D LiDAR - Data Labeler <span>@ Remotasks</span></h3>
+                        <p>Handled detailed data review, analyzed complex visual information, corrected inconsistencies to maintain accuracy & compliance in fast-paced remote environment, improving overall annotation precision.</p>
+                        <div class="tech-tags"><span>LiDAR</span><span>point cloud</span><span>quality compliance</span><span>3D annotation</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="education-cert">
+            <div class="section-title">
+                <span class="title-number">03</span>
+                <h2>academic & credentials</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="dual-grid">
+                <div class="edu-col">
+                    <div class="info-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Bachelor's in Computer Science</h3>
+                        <p>Kenyatta University · Software Engineering, AI specialization</p>
+                        <span class="date-badge">2018 - 2022</span>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-certificate"></i>
+                        <h3>Certificate, ICT</h3>
+                        <p>Daystar University · Networking, Cybersecurity, Digital literacy</p>
+                        <span class="date-badge">2018 - 2019</span>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-code"></i>
+                        <h3>ALX Software Engineering</h3>
+                        <p>AI Automation, Content Creation, Advanced Prompt Engineering</p>
+                        <span class="date-badge">2021 - 2022</span>
+                    </div>
+                </div>
+                <div class="cert-col">
+                    <div class="cert-badge-list">
+                        <div class="cert-item"><i class="fab fa-algolia"></i> ALX Africa (A.I certification)</div>
+                        <div class="cert-item"><i class="fas fa-laptop-code"></i> Daystar University (I.C.T)</div>
+                        <div class="cert-item"><i class="fab fa-google"></i> Google Digital Skills & Analytics</div>
+                        <div class="cert-item"><i class="fas fa-chalkboard-user"></i> LinkedIn Learning (Project Management)</div>
+                        <div class="cert-item"><i class="fas fa-desktop"></i> Petanns Driving & Computer College</div>
+                    </div>
+                    <div class="lang-box">
+                        <h4><i class="fas fa-language"></i> languages & communication</h4>
+                        <div class="lang-items">
+                            <span>English (fluent)</span><span>Swahili (native)</span><span>Luo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- new: AI achievements / key projects section -->
+        <section class="achievements">
+            <div class="section-title">
+                <span class="title-number">04</span>
+                <h2>key achievements & impact</h2>
+                <div class="title-line"></div>
+            </div>
+            <div class="achievement-grid">
+                <div class="achieve-card">
+                    <i class="fas fa-chart-simple"></i>
+                    <h4>25% efficiency gain</h4>
+                    <p>Optimized annotation pipelines for computer vision tasks</p>
+                </div>
+                <div class="achieve-card">
+                    <i class="fas fa-database"></i>
+                    <h4>500k+ images annotated</h4>
+                    <p>High-quality datasets for autonomous driving & robotics</p>
+                </div>
+                <div class="achieve-card">
+                    <i class="fas fa-check-double"></i>
+                    <h4>99.2% QA accuracy</h4>
+                    <p>Maintained exceptional quality across 15+ projects</p>
+                </div>
+                <div class="achieve-card">
+                    <i class="fas fa-people-arrows"></i>
+                    <h4>cross-functional lead</h4>
+                    <p>Mentored 10+ junior annotators & improved workflows</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="glow-bar">
+            <div class="marquee-text">
+                <span>✦ CRITICAL THINKING · REMOTE COLLABORATION · AI ETHICS · FAST LEARNER · AGILE MINDSET · SALES DEVELOPMENT · CLIENT-CENTRIC ✦</span>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-flex">
+                <div class="footer-copy">© 2026 JOHN AMOLO — AI OPS & SALES DEVELOPMENT SPECIALIST</div>
+                <div class="footer-icons">
+                    <i class="fab fa-github"></i>
+                    <i class="fab fa-linkedin"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fas fa-envelope"></i>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // futuristic dynamic interactions
+        document.addEventListener("DOMContentLoaded", () => {
+            // mouse move parallax for dual orb backgrounds
+            const orb = document.querySelector(".orb-bg");
+            const orb2 = document.querySelector(".orb-bg-secondary");
+            if (orb && orb2) {
+                document.addEventListener("mousemove", (e) => {
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
+                    orb.style.transform = `translate(${x * 12}px, ${y * 10}px) scale(1.02)`;
+                    orb2.style.transform = `translate(${-x * 8}px, ${-y * 6}px) scale(1.01)`;
+                });
+            }
+
+            // periodic glitch refresh
+            const glitchElement = document.querySelector(".glitch-text");
+            if (glitchElement) {
+                setInterval(() => {
+                    glitchElement.style.animation = "none";
+                    setTimeout(() => {
+                        glitchElement.style.animation = "glitch 4s infinite";
+                    }, 15);
+                }, 4800);
+            }
+
+            // hover effect on stat items and timeline dots
+            const allCards = document.querySelectorAll(".skill-category, .timeline-content, .info-card, .achieve-card");
+            allCards.forEach(card => {
+                card.addEventListener("mouseenter", () => {
+                    card.style.transition = "all 0.2s";
+                    card.style.boxShadow = "0 0 16px rgba(168, 85, 247, 0.45)";
+                });
+                card.addEventListener("mouseleave", () => {
+                    card.style.boxShadow = "none";
+                });
+            });
+
+            // update footer year
+            const yearSpan = document.querySelector(".footer-copy");
+            if (yearSpan) {
+                const currentYear = new Date().getFullYear();
+                yearSpan.innerHTML = `© ${currentYear} JOHN AMOLO — AI OPS & SALES DEVELOPMENT SPECIALIST`;
+            }
+
+            console.log("%c⚡ John Amolo | AI Operations & Sales Dev — futuristic portfolio fully loaded", "color: #b77cff; font-size: 14px; font-weight: bold;");
+        });
+    </script>
+</body>
+</html>
